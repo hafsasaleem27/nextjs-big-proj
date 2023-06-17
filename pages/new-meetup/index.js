@@ -1,8 +1,11 @@
 //our-domain.com/new-meetup
 
 import NewMeetupForm from "../../components/meetups/NewMeetupForm";
+import { useRouter } from "next/router";
 
 function NewMeetup() {
+  const router = useRouter();
+
   async function addMeetupHandler(enteredMeetupData) {
     console.log(enteredMeetupData);
     const response = await fetch("/api/new-meetup", {
@@ -15,6 +18,8 @@ function NewMeetup() {
 
     const data = await response.json();
     console.log(data);
+    
+    router.replace("/"); // push just pushes a new route whereas replace replaces the route completely
   }
 
   return <NewMeetupForm onAddMeetup={addMeetupHandler} />;
